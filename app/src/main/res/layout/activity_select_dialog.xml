@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:padding="20sp"
+    android:background="@drawable/shape_transparent2"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/video"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+       android:layout_weight="1"
+        android:onClick="fire"
+        android:scaleType="centerCrop"
+        android:src="@drawable/video" />
+    <View
+        android:layout_width="1dp"
+        android:background="@android:color/black"
+        android:layout_height="match_parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sms"
+        android:layout_width="60dp"
+android:layout_weight="1"
+        android:layout_height="60dp"
+        android:onClick="fire"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image" />
+<View
+    android:layout_width="1dp"
+    android:background="@android:color/black"
+    android:layout_height="match_parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:onClick="fire"
+        android:layout_weight="1"
+        android:id="@+id/call"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/phone" />
+</LinearLayout>

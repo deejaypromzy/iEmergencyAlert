@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "430340531645",
+    "firebase_url": "https://iemergency-alert.firebaseio.com",
+    "project_id": "iemergency-alert",
+    "storage_bucket": "iemergency-alert.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430340531645:android:5efd901536471862",
+        "android_client_info": {
+          "package_name": "com.prince.dj.iemergencyalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430340531645-vcs48v2lfepoilt8odguoansv2drskbc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDD13uCsYXYVT2S9u-Ha3cjz1f5PmROJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430340531645-vcs48v2lfepoilt8odguoansv2drskbc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
