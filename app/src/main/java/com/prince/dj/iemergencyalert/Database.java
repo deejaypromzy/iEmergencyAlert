@@ -117,10 +117,47 @@ private String uri;
         EmergencyContact = emergencyContact;
         UserName = userName;
     }
+    private String incident;
+    private String location;
+    private String date;
+    private String reportedBy;
 
-    public Database(String firstName, String phone, String gpsAddress) {
-        FirstName = firstName;
-        Phone = phone;
-        GpsAddress = gpsAddress;
+    public String getIncident() {
+        return incident;
+    }
+
+    public void setIncident(String incident) {
+        this.incident = incident;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getReportedBy() {
+        return reportedBy;
+    }
+
+    public void setReportedBy(String reportedBy) {
+        this.reportedBy = reportedBy;
+    }
+
+    public Database(String incident, String location, String date, String reportedBy) {
+        this.incident = incident;
+        this.location = location;
+        this.date = date;
+        this.reportedBy = reportedBy;
     }
 }

@@ -21,6 +21,9 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -48,6 +51,8 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
     String ec1,ec2,ec3;
     private String loc;
     private StorageReference UserVideoFileRef;
+    private FirebaseDatabase mfirebaseDatabase;
+    private DatabaseReference mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,9 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         lastLocation= prefs.getString("location",  "Oyibi-Accra @ Valley View Uni.");
 
+
+        mfirebaseDatabase = FirebaseDatabase.getInstance();
+        mref = mfirebaseDatabase.getReference();
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -168,6 +176,17 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                         ec1="0240741137";
                         loc="asamankese";
                     }
+
+                    final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+                    Database dbUser = new Database(
+                            "SOS",
+                            lastLocation,
+                            timestamp.toString(),
+                            user
+                    );
+                    mref.child("reports").push().setValue(dbUser);
+
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ec1));
                     startActivity(intent);
                     Toast.makeText(SelectDialog.this,"Calling "+loc+" police station",Toast.LENGTH_LONG).show();
@@ -183,6 +202,15 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent,"Select Picture"), Gallery_Pick);
 
+                    final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+                    Database dbUser = new Database(
+                            "SOS",
+                            lastLocation,
+                            timestamp.toString(),
+                            user
+                    );
+                    mref.child("reports").push().setValue(dbUser);
 //                    Intent galleryIntent = new Intent();
 //                    galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 //                    galleryIntent.setType("image/*");
@@ -197,17 +225,26 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
     }
     //Video Uploading Code
     private void uploadVideo() {
+        final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
         timestamp = df.format(date);
         final StorageReference filepath = UserVideoFileRef.child(timestamp).child("zee_video.mp4");
         final Uri uri = Uri.fromFile(new File(videofilename));
         StorageTask<UploadTask.TaskSnapshot> storageTask = filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                                                                           @Override
                                                                                                           public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                                                                                              Database dbUser = new Database(
+                                                                                                                      "SOS",
+                                                                                                                      lastLocation,
+                                                                                                                      timestamp.toString(),
+                                                                                                                      user
+                                                                                                              );
+                                                                                                              mref.child("reports").push().setValue(dbUser);
                                                                                                           }
 
-                                                                                                          Database dbUser = new Database(
-                                                                                                                  uri.toString()
-                                                                                                          );
+
+
                                                                                                       }
         );
 

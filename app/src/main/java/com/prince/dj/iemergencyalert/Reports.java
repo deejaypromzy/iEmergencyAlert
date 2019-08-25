@@ -178,13 +178,13 @@ public class Reports extends AppCompatActivity {
             }
 
             public void onFinish() {
-                mref.child("iEmergency").addValueEventListener(new ValueEventListener() {
+                mref.child("reports").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         showData(dataSnapshot);
                         mProgress.setVisibility(View.GONE);
 
-                        mref.child("iEmergency").addValueEventListener(new ValueEventListener() {
+                        mref.child("reports").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 mCartItemCount = (int) dataSnapshot.getChildrenCount();
@@ -227,15 +227,18 @@ public class Reports extends AppCompatActivity {
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             Database userDatabase = new Database();
 
-            userDatabase.setEmergencyContact((ds.getValue(Database.class)).getEmergencyContact());
-            userDatabase.setGpsAddress((ds.getValue(Database.class)).getGpsAddress());
-             userDatabase.setLastName((ds.getValue(Database.class)).getLastName());
-             userDatabase.setOtheNames((ds.getValue(Database.class)).getOtheNames());
-             userDatabase.setPhone((ds.getValue(Database.class)).getPhone());
-             userDatabase.setUri((ds.getValue(Database.class)).getUri());
+            userDatabase.setIncident((ds.getValue(Database.class)).getIncident());
+            userDatabase.setLocation((ds.getValue(Database.class)).getLocation());
+            userDatabase.setDate((ds.getValue(Database.class)).getDate());
+            userDatabase.setReportedBy((ds.getValue(Database.class)).getReportedBy());
 
 
-            mSportsData.add(new Database(userDatabase.getEmergencyContact(), userDatabase.getIdNumber(), userDatabase.getOtheNames()
+
+            mSportsData.add(new Database(
+                    userDatabase.getIncident(),
+                    userDatabase.getLocation(),
+                    userDatabase.getDate(),
+                    userDatabase.getReportedBy()
             ));
 
 
