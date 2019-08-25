@@ -40,6 +40,7 @@
                 android:layout_marginEnd="@dimen/fab_margin"
                 android:gravity="center_vertical"
                 android:textAlignment="center"
+                android:src="@mipmap/ic_launcher"
                 android:textColor="@android:color/white" />
 
             <LinearLayout
