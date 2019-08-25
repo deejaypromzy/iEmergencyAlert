@@ -307,7 +307,7 @@ public class Reports extends AppCompatActivity {
                 textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
-                    addNotification(Math.min(mCartItemCount, 99) + "SOS Alert !!!");
+                   // addNotification(Math.min(mCartItemCount, 99) + "SOS Alert !!!");
 
                 }
             }
