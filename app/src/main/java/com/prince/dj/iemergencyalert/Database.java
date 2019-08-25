@@ -10,8 +10,16 @@ class Database {
     private String GpsAddress;
     private String EmergencyContact;
     private String UserName;
-
+private String uri;
     public Database() {
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getFirstName() {
@@ -44,6 +52,10 @@ class Database {
 
     public void setIdType(String idType) {
         IdType = idType;
+    }
+
+    public Database(String uri) {
+        this.uri = uri;
     }
 
     public String getIdNumber() {
@@ -106,4 +118,9 @@ class Database {
         UserName = userName;
     }
 
+    public Database(String firstName, String phone, String gpsAddress) {
+        FirstName = firstName;
+        Phone = phone;
+        GpsAddress = gpsAddress;
+    }
 }

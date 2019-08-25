@@ -61,6 +61,7 @@
         <service android:name=".smsService" />
 
         <activity android:name=".notification"></activity>
+        <activity android:name=".Reports" />
     </application>
 
 </manifest>

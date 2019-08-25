@@ -20,6 +20,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,6 +47,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
     String fullName, snmBody,lastLocation,myLong,mylat;
     String ec1,ec2,ec3;
     private String loc;
+    private StorageReference UserVideoFileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
         setContentView(R.layout.activity_select_dialog);
         df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         date= new Date();
+        UserVideoFileRef = FirebaseStorage.getInstance().getReference();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         lastLocation= prefs.getString("location",  "Oyibi-Accra @ Valley View Uni.");
@@ -190,16 +198,18 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
     //Video Uploading Code
     private void uploadVideo() {
         timestamp = df.format(date);
-       // final StorageReference filepath = UserVideoFileRef.child(fireuser.getUid()).child(timestamp).child("zee_video.mp4");
+        final StorageReference filepath = UserVideoFileRef.child(timestamp).child("zee_video.mp4");
         final Uri uri = Uri.fromFile(new File(videofilename));
-//        storageTask = filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                                                     @Override
-//                                                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                                                     }UserDatabase dbUser = new UserDatabase(
-//                                                                             uri.toString()
-//                                                                     );
-//                                                                 }
-//        );
+        StorageTask<UploadTask.TaskSnapshot> storageTask = filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                                                          @Override
+                                                                                                          public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                                                          }
+
+                                                                                                          Database dbUser = new Database(
+                                                                                                                  uri.toString()
+                                                                                                          );
+                                                                                                      }
+        );
 
     }
 

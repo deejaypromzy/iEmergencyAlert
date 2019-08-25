@@ -168,11 +168,18 @@ public class Login extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     // Toast.makeText(Login.this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(Login.this, MainPage.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
 
+                       if (user.getEmail().contains("princedank")){
+                           Intent intent = new Intent(Login.this, Reports.class);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                           startActivity(intent);
+                           finish();
+                       }else {
+                           Intent intent = new Intent(Login.this, MainPage.class);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                           startActivity(intent);
+                           finish();
+                       }
                     }
                     else{
                         Toast.makeText(Login.this, "Email is not Verified \nCheck your Inbox", Toast.LENGTH_SHORT).show();
