@@ -1,12 +1,14 @@
 package com.prince.dj.iemergencyalert;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -325,10 +327,51 @@ public class Reports extends AppCompatActivity {
 
             //startActivity(new Intent(getApplicationContext(), Cart.class));
 
+        }else
+        if (id == R.id.action_settings) {
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Reports.this);
+            alertDialog.setTitle("iEmergency");
+            alertDialog.setIcon(R.mipmap.ic_launcher_round);
+            // Setting Dialog Message
+            alertDialog.setMessage("Are you sure you want to log out?");
+
+
+            // Setting Positive "Yes" Button
+            alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to invoke YES event
+                    signOut();
+                }
+            });
+
+
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to invoke NO event
+                    dialog.cancel();
+                }
+            });
+
+            // Showing Alert Message
+            alertDialog.show();
+            return true;
         }
 
 
         return super.onOptionsItemSelected(item);
+
+
+    }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(Reports.this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+
 
 
     }
