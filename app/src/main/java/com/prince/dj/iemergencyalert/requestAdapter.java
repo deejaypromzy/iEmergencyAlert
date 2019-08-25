@@ -191,10 +191,10 @@ class requestAdapter extends RecyclerView.Adapter<requestAdapter.ChildViewHolder
 //Glide.with(mContext).load(Uri.fromFile(new File(currentChild.get()))).into(img);
 
 
-            incident.setText(currentChild.getPhone());
-            location.setText((currentChild.getGpsAddress()));
-            dateOfIncident.setText((currentChild.getEmergencyContact()));
-           sender.setText((currentChild.getFirstName()));
+            incident.setText(currentChild.getIncident());
+            location.setText((currentChild.getLocation()));
+            dateOfIncident.setText((currentChild.getDate()));
+           sender.setText((currentChild.getReportedBy()));
 
 
             //Get the current sport

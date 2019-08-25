@@ -178,7 +178,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                     }
 
                     final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-
+                    timestamp = df.format(date);
                     Database dbUser = new Database(
                             "SOS",
                             lastLocation,
@@ -203,7 +203,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                     startActivityForResult(Intent.createChooser(intent,"Select Picture"), Gallery_Pick);
 
                     final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-
+                    timestamp = df.format(date);
                     Database dbUser = new Database(
                             "SOS",
                             lastLocation,
@@ -233,7 +233,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
         StorageTask<UploadTask.TaskSnapshot> storageTask = filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                                                                           @Override
                                                                                                           public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                                                                                                              timestamp = df.format(date);
                                                                                                               Database dbUser = new Database(
                                                                                                                       "SOS",
                                                                                                                       lastLocation,
