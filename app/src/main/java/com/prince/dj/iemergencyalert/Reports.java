@@ -1,5 +1,7 @@
 package com.prince.dj.iemergencyalert;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -253,6 +256,8 @@ public class Reports extends AppCompatActivity {
 
         //Notify the adapter of the change
         mAdapter.notifyDataSetChanged();
+        addNotification("SOS Alert !!!");
+
     }
 
 
@@ -302,11 +307,35 @@ public class Reports extends AppCompatActivity {
                 textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
+                    addNotification(Math.min(mCartItemCount, 99) + "SOS Alert !!!");
+
                 }
             }
         }
     }
+    private void addNotification(String msg) {
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher_round) //set icon for notification
+                        .setContentTitle("New SOS Alert") //set title of notification
+                        .setContentText(msg)//this is notification message
+                        .setAutoCancel(true) // makes auto cancel of notification
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT); //set priority of notification
 
+
+        Intent notificationIntent = new Intent(this, Reports.class);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //notification message will get at NotificationView
+      //  notificationIntent.putExtra("message", "This is a notification message");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
