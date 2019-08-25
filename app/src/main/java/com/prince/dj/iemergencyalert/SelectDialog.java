@@ -180,7 +180,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                     final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
                     timestamp = df.format(date);
                     Database dbUser = new Database(
-                            "SOS",
+                            "SOS BY PHONE CALL",
                             lastLocation,
                             timestamp.toString(),
                             user
@@ -205,7 +205,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                     final String user = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
                     timestamp = df.format(date);
                     Database dbUser = new Database(
-                            "SOS",
+                            "SOS by SMS",
                             lastLocation,
                             timestamp.toString(),
                             user
@@ -235,7 +235,7 @@ public class SelectDialog extends Activity implements ActivityCompat.OnRequestPe
                                                                                                           public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                                                                               timestamp = df.format(date);
                                                                                                               Database dbUser = new Database(
-                                                                                                                      "SOS",
+                                                                                                                      "SOS BY VIDEO",
                                                                                                                       lastLocation,
                                                                                                                       timestamp.toString(),
                                                                                                                       user
